@@ -1,5 +1,26 @@
-let disksNumber = 5,
-        turnsSpeed = 4074;
+function func(str, options){
 
-console.log( { turns: Math.pow(2,disksNumber) - 1, 
-                seconds: Math.floor((Math.pow(2,disksNumber) - 1)/turnsSpeed*3600) }); 
+        const repeatTimes = options.repeatTimes > 0 ? options.repeatTimes : 0;
+        const additionRepeatTimes = options.additionRepeatTimes > 0 ? options.additionRepeatTimes : 0;
+        const separator = options.separator ? options.separator : '+';
+        const additionSeparator = options.additionSeparator ? options.additionSeparator : '|';
+        const addition = typeof options.addition === 'undefined' ? '' : options.addition + '';
+        
+        let additionText = addition;
+
+        for (let i = 1; i < additionRepeatTimes; i++){
+                additionText += additionSeparator + addition;
+        }
+
+        str = str + '' + additionText;
+        let repeatText = str;
+
+        for (let i = 1; i < repeatTimes; i++){
+                repeatText += separator + str;
+        }
+        return repeatText;
+}
+
+console.log(func(null, { repeatTimes: 3, separator: '??? ', addition: null, additionRepeatTimes: 3, additionSeparator: '!!!' }));
+//nullnull!!!null!!!null??? nullnull!!!null!!!null??? nullnull!!!null!!!null
+//nullnull!!!null!!!null??? nullnull!!!null!!!null??? nullnull!!!null!!!null
